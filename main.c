@@ -73,7 +73,7 @@ int main (int argc, const char * argv[]) {
     int host = 0;
     int device = CL_DEVICE_TYPE_GPU;
     char hash[65];
-    char * character_set = DEFAULT_CHARSET;
+    char * character_set;
     cl_uint min_length = DEFAULT_MIN_LENGTH;
     cl_uint max_length = DEFAULT_MAX_LENGTH;
     size_t chunk_size = DEFAULT_CHUNK_SIZE;
@@ -145,6 +145,11 @@ int main (int argc, const char * argv[]) {
             default:
                 exit(EXIT_FAILURE);
         }
+    }
+
+    if(strlen(character_set) == 0) {
+      character_set = (char *)malloc((strlen(DEFAULT_CHARSET) + 1) * sizeof(char));
+      strcpy(character_set, DEFAULT_CHARSET);
     }
 
     argc -= optind;
